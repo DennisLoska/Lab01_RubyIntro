@@ -4,8 +4,8 @@ class Person
 
 # Constructor
   def initialize(hash)
-    @name = name
-    @hobbies = hobbies
+    @name = hash[:name]
+    @hobbies = hash[:hobbies]
   end
 
 def self.friendslist(persons)

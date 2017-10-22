@@ -54,6 +54,39 @@ Es wird eine neue Person **p** anhand der übergebenen Daten erstellt, indem der
 
 #### Story 2: As a User of the Service I want to see a list with People with whom I share hobbies including the hobbies we share, ordered by the number of shared hobbies (descending).
 
+Ein Objekt der Klasse Person besitzt die Attribute _name_ und _hobbies_. Beide werden je als String übergeben, wobei der Name gespeichert wird und der String _hobbies_ mit der split()-Methode in ein String Array konvertiert wird. So enthält jedes Objekt einen Namen und ein Array mit Hobbies.
 
+```ruby
+  def hobbies=(hobbies)
+    hobbies.split(",")
+    @hobbies = hobbies.split(",")
+  end
+```
+
+Als nächstes soll noch eine Methode erstellt werden, mit welcher die Personen verglichen werden können, anhand der Hobbies, die sie teilen:
+
+```ruby
+
+```
 
 ### 2. Initialization from a hash
+
+Um ein Objekt mit Hilfe eines Hashs zu erstellen, wird eine _intitialize_, die ein Hash erwartet, welcher die Attribute beinhaltet:
+
+```ruby
+# Constructor
+  def initialize(hash)
+    @name = hash[:name]
+    @hobbies = hash[:hobbies]
+  end
+```
+
+Mit Hilfe dieser Syntax lassen sich nun Objekte dieser Klasse wiefolgt erstellen:
+
+```ruby
+ Person.new(name: "Donald", hobbies: "Money, Bathing")
+ #oder auch
+ Person.new(:name => "Donald",:hobbies => "Money, Bathing")
+```
+
+Anahnd der _init_spec.rb_ soll diese Implementierung getestet werden.
