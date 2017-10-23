@@ -57,16 +57,59 @@ Es wird eine neue Person **p** anhand der übergebenen Daten erstellt, indem der
 Ein Objekt der Klasse Person besitzt die Attribute _name_ und _hobbies_. Beide werden je als String übergeben, wobei der Name gespeichert wird und der String _hobbies_ mit der split()-Methode in ein String Array konvertiert wird. So enthält jedes Objekt einen Namen und ein Array mit Hobbies.
 
 ```ruby
-  def hobbies=(hobbies)
-    hobbies.split(",")
-    @hobbies = hobbies.split(",")
+# Constructor
+  def initialize(hash)
+    if (hash != nil)
+      hash.each do |k, v|
+        instance_variable_set("@#{k}", v.to_s)
+      end
+      @hobbies = @hobbies.split(",")
+    end
   end
 ```
 
 Als nächstes soll noch eine Methode erstellt werden, mit welcher die Personen verglichen werden können, anhand der Hobbies, die sie teilen:
 
 ```ruby
+  def self.friendslist(persons)
+    arr = persons
+    hashArray = Array.new
+    for p in arr
+      for hobby in p.hobbies
+        temp_hash = {hobby: hobby, value: p.name}
+        hashArray.push(temp_hash)
+      end
+      sortedHashArray = hashArray.group_by {|k| k[:hobbies]}
+      puts hashArray
+      puts "-------------------------------"
+      puts sortedHashArray.to_a
+    end
+    puts hashArray
+  end
+```
+Es wird durch das Array iteriert und von jeder Person die Hobbies in einem temporärem Hash gespeichert, wobei hier die Hobbies der Value und der Key der Name der Person ist. Anschließend wird dieser neu erstellte Hash sortiert, was so aussieht:
 
+```
+{:hobby=>"Money", :value=>"Donald"}
+{:hobby=>" Bathing", :value=>"Donald"}
+{:hobby=>"Money", :value=>"Paul"}
+{:hobby=>" Bathing ", :value=>"Paul"}
+{:hobby=>"Money", :value=>" Lena "}
+{:hobby=>" Bathing ", :value=>" Lena "}
+{:hobby=>" ", :value=>" Klaus "}
+{:hobby=>" Bathing ", :value=>" Klaus "}
+{:hobby=>"Money", :value=>" Peter "}
+{:hobby=>" Bathing ", :value=>" Peter "}
+{:hobby=>"Money", :value=>"Donald"}
+{:hobby=>" Bathing", :value=>"Donald"}
+{:hobby=>"Money", :value=>"Paul"}
+{:hobby=>" Bathing ", :value=>"Paul"}
+{:hobby=>"Money", :value=>" Lena "}
+{:hobby=>" Bathing ", :value=>" Lena "}
+{:hobby=>" ", :value=>" Klaus "}
+{:hobby=>" Bathing ", :value=>" Klaus "}
+{:hobby=>"Money", :value=>" Peter "}
+{:hobby=>" Bathing ", :value=>" Peter "}
 ```
 
 ### 2. Initialization from a hash
@@ -89,4 +132,4 @@ Mit Hilfe dieser Syntax lassen sich nun Objekte dieser Klasse wiefolgt erstellen
  Person.new(:name => "Donald",:hobbies => "Money, Bathing")
 ```
 
-Anahnd der _init_spec.rb_ soll diese Implementierung getestet werden.
+Anahnd der _init_spec.rb_ soll diese Implementierung getestet werden, was bei uns jedoch nicht ganz so gut funktioniert...
