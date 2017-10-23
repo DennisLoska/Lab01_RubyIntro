@@ -1,6 +1,6 @@
 # Lab Report 01 - Lab Startup and Ruby Finger Exercises
 
-_Authors: Dennis Loska, Tony Dorfmeister, Ailee - 10.10.2017_
+_Authors: Dennis Loska, Tony Dorfmeister, Ai Dong - 10.10.2017_
 
 ## SETUP: Git & Github (Part 1 & 2)
 
